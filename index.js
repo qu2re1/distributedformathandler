@@ -1,10 +1,10 @@
-function rob(nums) {
-  let prevMax = 0;
-  let currMax = 0;
-  for (const num of nums) {
-    const temp = currMax;
-    currMax = Math.max(prevMax + num, currMax);
-    prevMax = temp;
+function minimumTotal(triangle) {
+  const n = triangle.length;
+  const dp = new Array(n + 1).fill(0);
+  for (let i = n - 1; i >= 0; i--) {
+    for (let j = 0; j <= i; j++) {
+      dp[j] = triangle[i][j] + Math.min(dp[j], dp[j + 1]);
+    }
   }
-  return currMax;
+  return dp[0];
 }
