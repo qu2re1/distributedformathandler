@@ -1,10 +1,21 @@
-function minimumTotal(triangle) {
-  const n = triangle.length;
-  const dp = new Array(n + 1).fill(0);
-  for (let i = n - 1; i >= 0; i--) {
-    for (let j = 0; j <= i; j++) {
-      dp[j] = triangle[i][j] + Math.min(dp[j], dp[j + 1]);
+function mergeTwoLists(l1, l2) {
+  const dummy = new ListNode();
+  let current = dummy;
+  while (l1 !== null && l2 !== null) {
+    if (l1.val < l2.val) {
+      current.next = l1;
+      l1 = l1.next;
+    } else {
+      current.next = l2;
+      l2 = l2.next;
     }
+    current = current.next;
   }
-  return dp[0];
+  if (l1 !== null) {
+    current.next = l1;
+  }
+  if (l2 !== null) {
+    current.next = l2;
+  }
+  return dummy.next;
 }
