@@ -1,21 +1,18 @@
-function mergeTwoLists(l1, l2) {
-  const dummy = new ListNode();
-  let current = dummy;
-  while (l1 !== null && l2 !== null) {
-    if (l1.val < l2.val) {
-      current.next = l1;
-      l1 = l1.next;
-    } else {
-      current.next = l2;
-      l2 = l2.next;
+function permute(nums) {
+  const result = [];
+  backtrack([]);
+  return result;
+  function backtrack(permutation) {
+    if (permutation.length === nums.length) {
+      result.push([...permutation]);
+      return;
     }
-    current = current.next;
+    for (const num of nums) {
+      if (!permutation.includes(num)) {
+        permutation.push(num);
+        backtrack(permutation);
+        permutation.pop();
+      }
+    }
   }
-  if (l1 !== null) {
-    current.next = l1;
-  }
-  if (l2 !== null) {
-    current.next = l2;
-  }
-  return dummy.next;
 }
