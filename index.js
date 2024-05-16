@@ -1,18 +1,14 @@
-function permute(nums) {
-  const result = [];
-  backtrack([]);
-  return result;
-  function backtrack(permutation) {
-    if (permutation.length === nums.length) {
-      result.push([...permutation]);
-      return;
+function rob(nums) {
+  if (nums.length === 1) return nums[0];
+  const robRange = (start, end) => {
+    let prevMax = 0;
+    let currMax = 0;
+    for (let i = start; i <= end; i++) {
+      const temp = currMax;
+      currMax = Math.max(currMax, prevMax + nums[i]);
+      prevMax = temp;
     }
-    for (const num of nums) {
-      if (!permutation.includes(num)) {
-        permutation.push(num);
-        backtrack(permutation);
-        permutation.pop();
-      }
-    }
-  }
+    return currMax;
+  };
+  return Math.max(robRange(0, nums.length - 2), robRange(1, nums.length - 1));
 }
